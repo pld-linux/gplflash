@@ -16,6 +16,8 @@ BuildRequires:	libmad-devel >= 0.14.2b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	zlib-devel >= 1.1.4
+BuildConflicts:	flash
+Obsoletes:	flash
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -38,6 +40,7 @@ Summary:	Header file required to build programs using gplflash library
 Summary(pl):	Pliki nag³ówkowe wymagane przez programy u¿ywaj±ce gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	flash-devel
 
 %description devel
 Header files required to build programs using gplflash library.
@@ -51,6 +54,7 @@ Summary:	Static gplflash library
 Summary(pl):	Statyczna biblioteka gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	flash-static
 
 %description static
 Static gplflash library.
@@ -63,6 +67,7 @@ Summary:	Mozilla plugin for Flash rendering
 Summary(pl):	Wtyczka Mozilli wu¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	mozilla-plugin-flash
 
 %description -n mozilla-plugin-%{name}
 Mozilla plugin for rendering of Flash animations based on gplflash
