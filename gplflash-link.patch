@@ -1,0 +1,21 @@
+--- gplflash-0.4.13/plugin/Makefile.am.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/plugin/Makefile.am	2005-02-10 19:01:42.105980408 +0100
+@@ -16,15 +16,9 @@
+ SHARED=-shared
+ 
+ libnpflash_la_SOURCES = plugin.c npunix.c
+-libnpflash_la_CFLAGS = -fpic -fPIC -DPIC $(OPTIMIZER) $(PLUGIN_DEFINES) -I../lib $(X_CFLAGS)
+-libnpflash_la_LDFLAGS = -L../lib/.libs  -lflash
+-
+-install-pluginLTLIBRARIES: $(plugin_LIBRARIES)
+-	mkdir -p "$(DESTDIR)$(PLUGIN_DIR)"
+-	cp $(srcdir)/.libs/libnpflash.so.0.0.0 "$(DESTDIR)$(PLUGIN_DIR)/libnpflash.so"
+-
+-uninstall-pluginLTLIBRARIES: $(plugin_LIBRARIES)
+-	rm -f "$(DESTDIR)$(PLUGIN_DIR)/libnpflash.so"
++libnpflash_la_CFLAGS = -fPIC -DPIC $(OPTIMIZER) $(PLUGIN_DEFINES) -I../lib $(X_CFLAGS)
++libnpflash_la_LIBADD = ../lib/libflash.la $(X_LIBS) -lXt
++libnpflash_la_LDFLAGS = -avoid-version
+ 
+ #	$(LIBTOOL) --mode=install -c .libs/libnpflash.so $(PLUGIN_DIR)
+ 
