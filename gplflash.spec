@@ -8,14 +8,14 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
 # Source0-md5:	1b14c21094eb07416842ac0f5298b3f1
 URL:		http://gplflash.sourceforge.net/
+BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libjpeg-devel
-BuildRequires:	zlib-devel >= 1.1.4
-BuildRequires:	XFree86-devel
 BuildRequires:	libmad-devel >= 0.14.2b
-BuildRequires:	libtool
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
+BuildRequires:	zlib-devel >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
