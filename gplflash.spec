@@ -1,5 +1,5 @@
 Summary:	Flash animations redering library
-Summary(pl):	Biblioteka renderuj±ca animacje flash
+Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
 Release:	1
@@ -19,11 +19,19 @@ BuildRequires:	zlib-devel >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-GPLFLash is based on Olivier Debons original work, which hasen't had a
+GPLFLash is based on Olivier Debons original work, which hasn't had a
 release since June 2000. This project hope to bring GPLFlash back as a
-free, portable and useable alternative to the flash-decoder released
-by Macromedia The project contains a decoding library, a player and
-(perhaps most importantly) a mozilla/netscape plugin.
+free, portable and useable alternative to the Flash-decoder released
+by Macromedia. The project contains a decoding library, a player and
+(perhaps most importantly) a Mozilla/Netscape plugin.
+
+%description -l pl
+GPLFlash to biblioteka oparta na pocz±tkowej pracy Olivera Debonsa,
+która nie by³a wydawana od czerwca 2000. Autorzy maj± nadziejê, ¿e ten
+projekt wskrzesi GPLFlash jako wolnodostêpn±, przeno¶n± i u¿ywaln±
+alternatywê dla dekodera Flasha wydawanego przez Macromediê. Projekt
+zawiera bibliotekê dekoduj±c±, odtwarzaæ i (prawdopodobnie
+najwa¿niejsz±) wtyczkê Mozilli/Netscape'a.
 
 %package devel
 Summary:	Header file required to build programs using gplflash library
@@ -52,7 +60,7 @@ Statyczna biblioteka gplflash.
 
 %package -n mozilla-plugin-%{name}
 Summary:	Mozilla plugin for Flash rendering
-Summary(pl):	Wtyczka mozilli wu¶wietlaj±ca animacje flash
+Summary(pl):	Wtyczka Mozilli wu¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -61,7 +69,7 @@ Mozilla plugin for rendering of Flash animations based on gplflash
 library.
 
 %description -n mozilla-plugin-%{name} -l pl
-Wtyczka mozilli wy¶wietlaj±ca animacje flash bazuj±ca na bibliotece
+Wtyczka Mozilli wy¶wietlaj±ca animacje Flash bazuj±ca na bibliotece
 gplflash.
 
 %prep
@@ -95,17 +103,17 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
-%{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_includedir}/*.h
 
 %files static
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.a
+%{_libdir}/lib*.a
 
 %files -n mozilla-plugin-%{name}
 %defattr(644,root,root,755)
