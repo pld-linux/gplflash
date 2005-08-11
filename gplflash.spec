@@ -2,7 +2,7 @@ Summary:	Flash animations redering library
 Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	2
+Release:	2.4
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
@@ -17,9 +17,12 @@ BuildRequires:	libmad-devel >= 0.14.2b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	zlib-devel >= 1.1.4
+BuildRequires:	rpmbuild(macros) >= 1.224
 BuildConflicts:	flash
 Obsoletes:	flash
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_plugindir	%{_libdir}/browser-plugins
 
 %description
 GPLFLash is based on Olivier Debons original work, which hasn't had a
@@ -63,20 +66,33 @@ Static gplflash library.
 %description static -l pl
 Statyczna biblioteka gplflash.
 
-%package -n mozilla-plugin-%{name}
-Summary:	Mozilla plugin for Flash rendering
+%package -n browser-plugin-%{name}
+Summary:	Browser plugin for Flash rendering
 Summary(pl):	Wtyczka Mozilli wu¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	mozilla-plugin-flash
+Obsoletes:	mozilla-plugin-gplflash
+Requires:	browser-plugins
 
-%description -n mozilla-plugin-%{name}
-Mozilla plugin for rendering of Flash animations based on gplflash
+# use macro, otherwise extra LF isinserted along with the ifarch
+%ifarch %{ix86} ppc sparc sparc64
+%define	browsers mozilla, mozilla-firefox, opera, konqueror
+%else
+%define	browsers mozilla, mozilla-firefox, konqueror
+%endif
+
+%description -n browser-plugin-%{name}
+Browser plugin for rendering of Flash animations based on gplflash
 library.
 
-%description -n mozilla-plugin-%{name} -l pl
+Supported browsers: %{browsers}.
+
+%description -n browser-plugin-%{name} -l pl
 Wtyczka Mozilli wy¶wietlaj±ca animacje Flash bazuj±ca na bibliotece
 gplflash.
+
+Supported browsers: %{browsers}.
 
 %prep
 %setup -q
@@ -89,7 +105,7 @@ gplflash.
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-plugin-dir=%{_libdir}/mozilla/plugins \
+	--with-plugin-dir=%{_plugindir} \
 	--enable-shared \
 	--enable-static
 %{__make}
@@ -100,11 +116,40 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# include in -devel and -static instead?
+rm -f $RPM_BUILD_ROOT%{_libdir}/browser-plugins/libnpflash.{l,}a
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
+
+%triggerin -n browser-plugin-%{name} -- mozilla-firefox
+%nsplugin_install -d %{_libdir}/mozilla-firefox/plugins libnpflash.so
+
+%triggerun -n browser-plugin-%{name} -- mozilla-firefox
+%nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libnpflash.so
+
+%triggerin -n browser-plugin-%{name} -- mozilla
+%nsplugin_install -d %{_libdir}/mozilla/plugins libnpflash.so
+
+%triggerun -n browser-plugin-%{name} -- mozilla
+%nsplugin_uninstall -d %{_libdir}/mozilla/plugins libnpflash.so
+
+%ifarch %{ix86} ppc sparc sparc64
+%triggerin -n browser-plugin-%{name} -n browser-plugin-%{name} -- opera
+%nsplugin_install -d %{_libdir}/opera/plugins libnpflash.so
+
+%triggerun -n browser-plugin-%{name} -- opera
+%nsplugin_uninstall -d %{_libdir}/opera/plugins libnpflash.so
+%endif
+
+%triggerin -n browser-plugin-%{name} -- konqueror
+%nsplugin_install -d %{_libdir}/kde3/plugins/konqueror libnpflash.so
+
+%triggerun -n browser-plugin-%{name} -- konqueror
+%nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libnpflash.so
 
 %files
 %defattr(644,root,root,755)
@@ -122,6 +167,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
 
-%files -n mozilla-plugin-%{name}
+%files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/mozilla/plugins/lib*flash.so
+%attr(755,root,root) %{_plugindir}/libnpflash.so
