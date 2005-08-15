@@ -2,11 +2,13 @@ Summary:	Flash animations redering library
 Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	2.4
+Release:	2.6
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
 # Source0-md5:	1b14c21094eb07416842ac0f5298b3f1
+Source1:	%{name}.desktop
+Source2:	%{name}.png
 Patch0:		%{name}-link.patch
 URL:		http://gplflash.sourceforge.net/
 BuildRequires:	XFree86-devel
@@ -119,6 +121,10 @@ rm -rf $RPM_BUILD_ROOT
 # include in -devel and -static instead?
 rm -f $RPM_BUILD_ROOT%{_libdir}/browser-plugins/libnpflash.{l,}a
 
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/swfplayer.desktop
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/swfplayer.png
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -156,6 +162,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%{_desktopdir}/*
+%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
