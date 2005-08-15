@@ -6,6 +6,6 @@ Exec=swfplayer
 GenericName=SWF Player
 Icon=swfplayer
 MimeType=application/x-shockwave-flash;application/x-futuresplash
-Name=GPLflash SWF Player
+Name=SWF Player
 Terminal=false
 Type=Application
