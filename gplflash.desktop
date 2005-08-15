@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=Qt;KDE;AudioVideo;Player;
+Comment=SWF Player
+Encoding=UTF-8
+Exec=swfplayer
+GenericName=SWF Player
+Icon=swfplayer
+MimeType=application/x-shockwave-flash
+Name=GPLflash SWF Player
+Terminal=false
+Type=Application
