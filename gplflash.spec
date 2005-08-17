@@ -70,7 +70,7 @@ Statyczna biblioteka gplflash.
 
 %package -n browser-plugin-%{name}
 Summary:	Browser plugin for Flash rendering
-Summary(pl):	Wtyczka Mozilli wu¶wietlaj±ca animacje Flash
+Summary(pl):	Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	mozilla-plugin-flash
@@ -91,10 +91,10 @@ library.
 Supported browsers: %{browsers}.
 
 %description -n browser-plugin-%{name} -l pl
-Wtyczka Mozilli wy¶wietlaj±ca animacje Flash bazuj±ca na bibliotece
+Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash oparta na bibliotece
 gplflash.
 
-Supported browsers: %{browsers}.
+Obs³ugiwane przegl±darki: %{browsers}.
 
 %prep
 %setup -q
