@@ -75,7 +75,7 @@ Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	mozilla-plugin-flash
 Obsoletes:	mozilla-plugin-gplflash
-Requires:	browser-plugins
+Requires:	browser-plugins(%{_target_cpu})
 
 # use macro, otherwise extra LF inserted along with the ifarch
 %ifarch %{ix86} ppc sparc sparc64
