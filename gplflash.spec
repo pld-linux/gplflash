@@ -77,7 +77,7 @@ Obsoletes:	mozilla-plugin-flash
 Obsoletes:	mozilla-plugin-gplflash
 Requires:	browser-plugins
 
-# use macro, otherwise extra LF isinserted along with the ifarch
+# use macro, otherwise extra LF inserted along with the ifarch
 %ifarch %{ix86} ppc sparc sparc64
 %define	browsers mozilla, mozilla-firefox, opera, konqueror
 %else
@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %nsplugin_uninstall -d %{_libdir}/mozilla/plugins libnpflash.so
 
 %ifarch %{ix86} ppc sparc sparc64
-%triggerin -n browser-plugin-%{name} -n browser-plugin-%{name} -- opera
+%triggerin -n browser-plugin-%{name} -- opera
 %nsplugin_install -d %{_libdir}/opera/plugins libnpflash.so
 
 %triggerun -n browser-plugin-%{name} -- opera
