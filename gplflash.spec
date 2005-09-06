@@ -2,7 +2,7 @@ Summary:	Flash animations redering library
 Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	2.6
+Release:	2.9
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
@@ -19,7 +19,7 @@ BuildRequires:	libmad-devel >= 0.14.2b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	zlib-devel >= 1.1.4
-BuildRequires:	rpmbuild(macros) >= 1.224
+BuildRequires:	rpmbuild(macros) >= 1.236
 BuildConflicts:	flash
 Obsoletes:	flash
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,9 +73,11 @@ Summary:	Browser plugin for Flash rendering
 Summary(pl):	Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	browser-plugins(%{_target_cpu})
 Obsoletes:	mozilla-plugin-flash
 Obsoletes:	mozilla-plugin-gplflash
-Requires:	browser-plugins(%{_target_cpu})
+# for migrate purposes (greedy poldek upgrade)
+Provides:	mozilla-plugin-gplflash
 
 # use macro, otherwise extra LF inserted along with the ifarch
 %ifarch %{ix86} ppc sparc sparc64
@@ -156,6 +158,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %triggerun -n browser-plugin-%{name} -- konqueror
 %nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libnpflash.so
+
+# as rpm removes the old obsoleted package files after the triggers
+# above are ran, add another trigger to make the links there.
+%triggerpostun -- mozilla-plugin-gplflash
+%nsplugin_install -f -d %{_libdir}/mozilla/plugins libnpflash.so
 
 %files
 %defattr(644,root,root,755)
