@@ -2,7 +2,7 @@ Summary:	Flash animations redering library
 Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	2.9
+Release:	3
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
