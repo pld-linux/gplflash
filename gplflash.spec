@@ -159,6 +159,12 @@ rm -rf $RPM_BUILD_ROOT
 %triggerun -n browser-plugin-%{name} -- konqueror
 %nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libnpflash.so
 
+%triggerin -n browser-plugin-%{name} -- seamonkey
+%nsplugin_install -d %{_libdir}/seamonkey/plugins libnpflash.so
+
+%triggerun -n browser-plugin-%{name} -- seamonkey
+%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libnpflash.so
+
 # as rpm removes the old obsoleted package files after the triggers
 # above are ran, add another trigger to make the links there.
 %triggerpostun -- mozilla-plugin-gplflash
