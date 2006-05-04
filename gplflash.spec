@@ -2,7 +2,7 @@ Summary:	Flash animations redering library
 Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	3
+Release:	4
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
@@ -73,7 +73,7 @@ Summary:	Browser plugin for Flash rendering
 Summary(pl):	Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	browser-plugins(%{_target_cpu})
+Requires:	browser-plugins(%{_target_base_arch})
 Obsoletes:	mozilla-plugin-flash
 Obsoletes:	mozilla-plugin-gplflash
 # for migrate purposes (greedy poldek upgrade)
