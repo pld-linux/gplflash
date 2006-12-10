@@ -22,6 +22,7 @@ BuildRequires:	zlib-devel >= 1.1.4
 BuildRequires:	rpmbuild(macros) >= 1.236
 BuildConflicts:	flash
 Obsoletes:	flash
+Obsoletes:	gplflash2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_plugindir	%{_libdir}/browser-plugins
@@ -47,6 +48,7 @@ Summary(pl):	Pliki nag³ówkowe wymagane przez programy u¿ywaj±ce gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	flash-devel
+Obsoletes:	gplflash2-devel
 
 %description devel
 Header files required to build programs using gplflash library.
@@ -61,6 +63,7 @@ Summary(pl):	Statyczna biblioteka gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	flash-static
+Obsoletes:	gplflash2-static
 
 %description static
 Static gplflash library.
@@ -74,10 +77,12 @@ Summary(pl):	Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins(%{_target_base_arch})
+# Provides for migrate purposes (greedy poldek upgrade)
+Provides:	mozilla-plugin-gplflash
+Obsoletes:	browser-plugin-gplflash2
 Obsoletes:	mozilla-plugin-flash
 Obsoletes:	mozilla-plugin-gplflash
-# for migrate purposes (greedy poldek upgrade)
-Provides:	mozilla-plugin-gplflash
+Obsoletes:	mozilla-plugin-gplflash2
 
 # use macro, otherwise extra LF inserted along with the ifarch
 %ifarch %{ix86} ppc sparc sparc64
