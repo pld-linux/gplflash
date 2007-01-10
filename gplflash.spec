@@ -2,7 +2,7 @@ Summary:	Flash animations redering library
 Summary(pl):	Biblioteka renderuj±ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	6
+Release:	7
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
@@ -18,14 +18,12 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libmad-devel >= 0.14.2b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	rpmbuild(macros) >= 1.236
+BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	zlib-devel >= 1.1.4
 BuildConflicts:	flash
 Obsoletes:	flash
 Obsoletes:	gplflash2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_plugindir	%{_libdir}/browser-plugins
 
 %description
 GPLFLash is based on Olivier Debons original work, which hasn't had a
@@ -77,6 +75,7 @@ Summary(pl):	Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins(%{_target_base_arch})
+Requires:	browser-plugins >= 2.0
 # Provides for migrate purposes (greedy poldek upgrade)
 Provides:	mozilla-plugin-gplflash
 Obsoletes:	browser-plugin-gplflash2
@@ -84,24 +83,13 @@ Obsoletes:	mozilla-plugin-flash
 Obsoletes:	mozilla-plugin-gplflash
 Obsoletes:	mozilla-plugin-gplflash2
 
-# use macro, otherwise extra LF inserted along with the ifarch
-%ifarch %{ix86} ppc sparc sparc64
-%define	browsers mozilla, mozilla-firefox, opera, konqueror
-%else
-%define	browsers mozilla, mozilla-firefox, konqueror
-%endif
-
 %description -n browser-plugin-%{name}
 Browser plugin for rendering of Flash animations based on gplflash
 library.
 
-Supported browsers: %{browsers}.
-
 %description -n browser-plugin-%{name} -l pl
 Wtyczka przegl±darki wy¶wietlaj±ca animacje Flash oparta na bibliotece
 gplflash.
-
-Obs³ugiwane przegl±darki: %{browsers}.
 
 %prep
 %setup -q
@@ -114,7 +102,7 @@ Obs³ugiwane przegl±darki: %{browsers}.
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-plugin-dir=%{_plugindir} \
+	--with-plugin-dir=%{_browserpluginsdir} \
 	--enable-shared \
 	--enable-static
 %{__make}
@@ -138,48 +126,13 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%triggerin -n browser-plugin-%{name} -- mozilla-firefox
-%nsplugin_install -d %{_libdir}/mozilla-firefox/plugins libnpflash.so
+%post -n browser-plugin-%{name}
+%update_browser_plugins
 
-%triggerun -n browser-plugin-%{name} -- mozilla-firefox
-%nsplugin_uninstall -d %{_libdir}/mozilla-firefox/plugins libnpflash.so
-
-%triggerin -n browser-plugin-%{name} -- mozilla-firefox-bin
-%nsplugin_install -d %{_libdir}/mozilla-firefox-bin/plugins libnpflash.so
-
-%triggerun -n browser-plugin-%{name} -- mozilla-firefox-bin
-%nsplugin_uninstall -d %{_libdir}/mozilla-firefox-bin/plugins libnpflash.so
-
-%triggerin -n browser-plugin-%{name} -- mozilla
-%nsplugin_install -d %{_libdir}/mozilla/plugins libnpflash.so
-
-%triggerun -n browser-plugin-%{name} -- mozilla
-%nsplugin_uninstall -d %{_libdir}/mozilla/plugins libnpflash.so
-
-%ifarch %{ix86} ppc sparc sparc64
-%triggerin -n browser-plugin-%{name} -- opera
-%nsplugin_install -d %{_libdir}/opera/plugins libnpflash.so
-
-%triggerun -n browser-plugin-%{name} -- opera
-%nsplugin_uninstall -d %{_libdir}/opera/plugins libnpflash.so
-%endif
-
-%triggerin -n browser-plugin-%{name} -- konqueror
-%nsplugin_install -d %{_libdir}/kde3/plugins/konqueror libnpflash.so
-
-%triggerun -n browser-plugin-%{name} -- konqueror
-%nsplugin_uninstall -d %{_libdir}/kde3/plugins/konqueror libnpflash.so
-
-%triggerin -n browser-plugin-%{name} -- seamonkey
-%nsplugin_install -d %{_libdir}/seamonkey/plugins libnpflash.so
-
-%triggerun -n browser-plugin-%{name} -- seamonkey
-%nsplugin_uninstall -d %{_libdir}/seamonkey/plugins libnpflash.so
-
-# as rpm removes the old obsoleted package files after the triggers
-# above are ran, add another trigger to make the links there.
-%triggerpostun -- mozilla-plugin-gplflash
-%nsplugin_install -f -d %{_libdir}/mozilla/plugins libnpflash.so
+%postun -n browser-plugin-%{name}
+if [ "$1" = 0 ]; then
+	%update_browser_plugins
+fi
 
 %files
 %defattr(644,root,root,755)
@@ -201,4 +154,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_plugindir}/libnpflash.so
+%attr(755,root,root) %{_browserpluginsdir}/libnpflash.so
