@@ -1,5 +1,5 @@
 Summary:	Flash animations redering library
-Summary(pl):	Biblioteka renderuj±ca animacje Flash
+Summary(pl.UTF-8):   Biblioteka renderujÄ…ca animacje Flash
 Name:		gplflash
 Version:	0.4.13
 Release:	2.3
@@ -31,17 +31,17 @@ free, portable and useable alternative to the Flash-decoder released
 by Macromedia. The project contains a decoding library, a player and
 (perhaps most importantly) a Mozilla/Netscape plugin.
 
-%description -l pl
-GPLFlash to biblioteka oparta na pocz±tkowej pracy Olivera Debonsa,
-która nie by³a wydawana od czerwca 2000. Autorzy maj± nadziejê, ¿e ten
-projekt wskrzesi GPLFlash jako wolnodostêpn±, przeno¶n± i u¿ywaln±
-alternatywê dla dekodera Flasha wydawanego przez Macromediê. Projekt
-zawiera bibliotekê dekoduj±c±, odtwarzaæ i (prawdopodobnie
-najwa¿niejsz±) wtyczkê Mozilli/Netscape'a.
+%description -l pl.UTF-8
+GPLFlash to biblioteka oparta na poczÄ…tkowej pracy Olivera Debonsa,
+ktÃ³ra nie byÅ‚a wydawana od czerwca 2000. Autorzy majÄ… nadziejÄ™, Å¼e ten
+projekt wskrzesi GPLFlash jako wolnodostÄ™pnÄ…, przenoÅ›nÄ… i uÅ¼ywalnÄ…
+alternatywÄ™ dla dekodera Flasha wydawanego przez MacromediÄ™. Projekt
+zawiera bibliotekÄ™ dekodujÄ…cÄ…, odtwarzaÄ‡ i (prawdopodobnie
+najwaÅ¼niejszÄ…) wtyczkÄ™ Mozilli/Netscape'a.
 
 %package devel
 Summary:	Header file required to build programs using gplflash library
-Summary(pl):	Pliki nag³ówkowe wymagane przez programy u¿ywaj±ce gplflash
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe wymagane przez programy uÅ¼ywajÄ…ce gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	flash-devel
@@ -49,13 +49,13 @@ Obsoletes:	flash-devel
 %description devel
 Header files required to build programs using gplflash library.
 
-%description devel -l pl
-Pliki nag³ówkowe niezbêdne do kompilacji programów korzystaj±cych z
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe niezbÄ™dne do kompilacji programÃ³w korzystajÄ…cych z
 biblioteki gplflash.
 
 %package static
 Summary:	Static gplflash library
-Summary(pl):	Statyczna biblioteka gplflash
+Summary(pl.UTF-8):   Statyczna biblioteka gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	flash-static
@@ -63,12 +63,12 @@ Obsoletes:	flash-static
 %description static
 Static gplflash library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka gplflash.
 
 %package -n browser-plugin-%{name}
 Summary:	Browser plugin for Flash rendering
-Summary(pl):	Wtyczka Mozilli wu¶wietlaj±ca animacje Flash
+Summary(pl.UTF-8):   Wtyczka Mozilli wuÅ›wietlajÄ…ca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	mozilla-plugin-flash
@@ -88,8 +88,8 @@ library.
 
 Supported browsers: %{browsers}.
 
-%description -n browser-plugin-%{name} -l pl
-Wtyczka Mozilli wy¶wietlaj±ca animacje Flash bazuj±ca na bibliotece
+%description -n browser-plugin-%{name} -l pl.UTF-8
+Wtyczka Mozilli wyÅ›wietlajÄ…ca animacje Flash bazujÄ…ca na bibliotece
 gplflash.
 
 Supported browsers: %{browsers}.
