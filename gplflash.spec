@@ -1,5 +1,5 @@
 Summary:	Flash animations redering library
-Summary(pl.UTF-8):   Biblioteka renderująca animacje Flash
+Summary(pl.UTF-8):	Biblioteka renderująca animacje Flash
 Name:		gplflash
 Version:	0.4.13
 Release:	7
@@ -42,7 +42,7 @@ najważniejszą) wtyczkę Mozilli/Netscape'a.
 
 %package devel
 Summary:	Header file required to build programs using gplflash library
-Summary(pl.UTF-8):   Pliki nagłówkowe wymagane przez programy używające gplflash
+Summary(pl.UTF-8):	Pliki nagłówkowe wymagane przez programy używające gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	flash-devel
@@ -57,7 +57,7 @@ biblioteki gplflash.
 
 %package static
 Summary:	Static gplflash library
-Summary(pl.UTF-8):   Statyczna biblioteka gplflash
+Summary(pl.UTF-8):	Statyczna biblioteka gplflash
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	flash-static
@@ -71,7 +71,7 @@ Statyczna biblioteka gplflash.
 
 %package -n browser-plugin-%{name}
 Summary:	Browser plugin for Flash rendering
-Summary(pl.UTF-8):   Wtyczka przeglądarki wyświetlająca animacje Flash
+Summary(pl.UTF-8):	Wtyczka przeglądarki wyświetlająca animacje Flash
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins(%{_target_base_arch})
