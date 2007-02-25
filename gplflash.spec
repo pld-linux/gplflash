@@ -23,6 +23,7 @@ BuildRequires:	zlib-devel >= 1.1.4
 BuildConflicts:	flash
 Obsoletes:	flash
 Obsoletes:	gplflash2
+Provides:	browser(flash)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
