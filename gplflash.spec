@@ -23,7 +23,6 @@ BuildRequires:	zlib-devel >= 1.1.4
 BuildConflicts:	flash
 Obsoletes:	flash
 Obsoletes:	gplflash2
-Provides:	browser(flash)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,6 +76,7 @@ Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins(%{_target_base_arch})
 Requires:	browser-plugins >= 2.0
+Provides:	browser(flash)
 # Provides for migrate purposes (greedy poldek upgrade)
 Provides:	mozilla-plugin-gplflash
 Obsoletes:	browser-plugin-gplflash2
