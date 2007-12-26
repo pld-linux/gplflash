@@ -1,11 +1,10 @@
 [Desktop Entry]
 Categories=Qt;KDE;AudioVideo;Player;
 Comment=SWF Player
-Encoding=UTF-8
 Exec=swfplayer
 GenericName=SWF Player
 Icon=swfplayer
-MimeType=application/x-shockwave-flash;application/x-futuresplash
+MimeType=application/x-shockwave-flash;application/x-futuresplash;
 Name=SWF Player
 Terminal=false
 Type=Application
