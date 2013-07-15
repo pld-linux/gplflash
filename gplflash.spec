@@ -2,16 +2,16 @@ Summary:	Flash animations redering library
 Summary(pl.UTF-8):	Biblioteka renderująca animacje Flash
 Name:		gplflash
 Version:	0.4.13
-Release:	7
-License:	GPL
+Release:	8
+License:	GPL v2+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/gplflash/%{name}-%{version}.tar.bz2
 # Source0-md5:	1b14c21094eb07416842ac0f5298b3f1
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-link.patch
+Patch1:		%{name}-c++.patch
 URL:		http://gplflash.sourceforge.net/
-BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libjpeg-devel
@@ -19,6 +19,9 @@ BuildRequires:	libmad-devel >= 0.14.2b
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.357
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	zlib-devel >= 1.1.4
 BuildConflicts:	flash
 Obsoletes:	flash
@@ -95,6 +98,7 @@ gplflash.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -114,8 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# include in -devel and -static instead?
-rm -f $RPM_BUILD_ROOT%{_libdir}/browser-plugins/libnpflash.{l,}a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/browser-plugins/libnpflash.{la,a}
 
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/swfplayer.desktop
@@ -138,20 +141,21 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
+%attr(755,root,root) %{_bindir}/swfplayer
+%attr(755,root,root) %{_libdir}/libflash.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libflash.so.0
+%{_desktopdir}/swfplayer.desktop
+%{_pixmapsdir}/swfplayer.png
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/libflash.so
+%{_libdir}/libflash.la
+%{_includedir}/flash.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libflash.a
 
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)

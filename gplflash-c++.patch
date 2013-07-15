@@ -1,0 +1,77 @@
+--- gplflash-0.4.13/lib/matrix.h.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/lib/matrix.h	2013-07-15 19:06:39.188948943 +0200
+@@ -33,13 +33,13 @@ public:
+ #endif
+ 
+ 	inline
+-	long Matrix::getX(long x, long y)
++	long getX(long x, long y)
+ 	{
+ 		return (long) (x*a+y*b+tx);
+ 	};
+ 
+ 	inline
+-	long Matrix::getY(long x, long y)
++	long getY(long x, long y)
+ 	{
+ 		return (long) (x*c+y*d+ty);
+ 	};
+--- gplflash-0.4.13/lib/sound.h.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/lib/sound.h	2013-07-15 19:07:40.975613016 +0200
+@@ -103,9 +103,9 @@ public:
+ 	long		 playSounds();		// Actually play sounds of all instances
+ 	long		 fillSoundBuffer(SoundList *, char *buffer, long bufferSize); // Fill sound buffer
+ private:
+-	int SoundMixer::Mp3Scale(mad_fixed_t sample);
+-	void SoundMixer::Mp3Decompress(SoundList *sl);
+-	void SoundMixer::uninitMp3Sounds(SoundList *sl);
++	int Mp3Scale(mad_fixed_t sample);
++	void Mp3Decompress(SoundList *sl);
++	void uninitMp3Sounds(SoundList *sl);
+ };
+ 
+ #endif /* _SOUND_H_ */
+--- gplflash-0.4.13/lib/graphic16.h.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/lib/graphic16.h	2013-07-15 19:08:26.265611116 +0200
+@@ -24,7 +24,7 @@
+ 
+ class GraphicDevice16: public GraphicDevice {
+ private:
+-	long GraphicDevice16::allocColor(Color color);
++	long allocColor(Color color);
+ 
+ public:
+ 	GraphicDevice16(FlashDisplay *fd);
+--- gplflash-0.4.13/lib/graphic24.h.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/lib/graphic24.h	2013-07-15 19:08:31.615610890 +0200
+@@ -24,7 +24,7 @@
+ 
+ class GraphicDevice24: public GraphicDevice {
+ private:
+-	long GraphicDevice24::allocColor(Color color);
++	long allocColor(Color color);
+ 
+ public:
+ 	GraphicDevice24(FlashDisplay *fd);
+--- gplflash-0.4.13/lib/graphic32.h.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/lib/graphic32.h	2013-07-15 19:08:37.412277314 +0200
+@@ -24,7 +24,7 @@
+ 
+ class GraphicDevice32: public GraphicDevice {
+ private:
+-	long GraphicDevice32::allocColor(Color color);
++	long allocColor(Color color);
+ 
+ public:
+ 	GraphicDevice32(FlashDisplay *fd);
+--- gplflash-0.4.13/lib/swf.h.orig	2005-01-19 19:30:52.000000000 +0100
++++ gplflash-0.4.13/lib/swf.h	2013-07-15 19:14:34.082262346 +0200
+@@ -199,7 +199,7 @@ enum
+ #define true 1
+ #endif
+ 
+-extern int shape_size,shape_nb,shaperecord_size,shaperecord_nb,style_size,style_nb;
++extern "C" int shape_size,shape_nb,shaperecord_size,shaperecord_nb,style_size,style_nb;
+ 
+ typedef void (*ScanLineFunc)(void *id, long y, long start, long end);
+ 
